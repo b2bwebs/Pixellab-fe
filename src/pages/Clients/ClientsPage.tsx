@@ -64,6 +64,28 @@ const Clientspage = () => {
             render: (index: number, row: any) => <div>{row.is_active ? 'Active' : 'Inactive'}</div>,
         },
         {
+            title: 'Default Max Pages',
+            key: 'default_max_pages',
+        },
+        {
+            title: 'AI Config',
+            key: 'ai_config',
+            render: (index: number, row: any) => (
+                <div>
+                    {Array.isArray(row.ai_config) && row.ai_config.length > 0
+                        ? row.ai_config.map((config: any, idx: number) => (
+                              <div key={idx}>
+                                  <span>
+                                      {config.file_pages ?? '-'}: {config.max_final_pages ?? '-'}
+                                  </span>
+                              </div>
+                          ))
+                        : '-'}
+                </div>
+            ),
+        },
+
+        {
             title: 'Created At',
             key: 'created_at',
             render: (index: number, row: any) => <div>{UIHelpers.DateFormat(row.created_at)}</div>,
@@ -167,7 +189,7 @@ const Clientspage = () => {
     });
 
     const { loading, setQuery, data } = useGetCall(SERVICE.CLIENTS, { avoidFetch: true });
-    console.log('API data:', data);
+    // console.log('API data:', data);
 
     const { loading: deleteLoading, Delete: DeleteBlog } = useActionCall(SERVICE.CLIENTS);
     const BlogAPI = () => {

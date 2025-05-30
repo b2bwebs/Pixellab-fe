@@ -22,7 +22,7 @@ const ClientFormModal = ({ recoilApi = () => {} }) => {
         avoidFetch: !Boolean(Edit),
         key: Edit,
     });
-    console.log(data);
+    // console.log(data);
 
     const closeModal = () => {
         updateSearchParam({ deleteParams: ['Modal', 'Edit'] });
